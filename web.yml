@@ -1,0 +1,30 @@
+---
+- hosts: deploy
+  user: root
+  tasks:
+    - name: install packages
+      yum:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - etcd
+        - docker
+        - kubernetes-master
+    - name: start packages
+      service:
+        name: "{{ item }}"
+        state: restarted
+      with_items:
+        - etcd
+        - docker
+        - kube-apiserver
+        - kube-controller-manager
+        - kube-scheduler
+    - name: enable packages
+      command: systemctl enable {{ item }}
+      with_items:
+        - etcd
+        - docker
+        - kube-apiserver
+        - kube-controller-manager
+        - kube-scheduler
