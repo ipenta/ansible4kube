@@ -1,2 +1,5 @@
-[deploy]
+[master]
 kube-master ansible_host=10.10.0.7 ansible_ssh_user=root ansible_ssh_pass='pa55w0rd'
+
+[node]
+kube-node ansible_host=10.10.0.9 ansible_ssh_user=root ansible_ssh_pass='pa55w0rd'

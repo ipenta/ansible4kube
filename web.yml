@@ -1,5 +1,5 @@
 ---
-- hosts: deploy
+- hosts: kube-master
   user: root
   tasks:
     - name: install packages
@@ -28,3 +28,27 @@
         - kube-apiserver
         - kube-controller-manager
         - kube-scheduler
+- hosts: kube-node
+  user: root
+  tasks:
+    - name: install packages
+      yum:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - docker
+        - kubernetes-node
+    - name: start packages
+      service:
+        name: "{{ item }}"
+        state: restarted
+      with_items:
+        - docker
+        - kube-proxy
+        - kubelet
+    - name: enable packages
+      command: systemctl enable {{ item }}
+      with_items:
+        - docker
+        - kube-proxy
+        - kubelet
