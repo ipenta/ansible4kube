@@ -1,1 +1,1 @@
-ansible-playbook prepare.yml
+ansible-playbook -i inventory/hosts init.yml
