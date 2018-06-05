@@ -1,1 +1,1 @@
-cd pkg && ansible-playbook web.yml
+ansible-playbook prepare.yml
