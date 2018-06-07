@@ -1,4 +1,0 @@
-- name: prepare
-  shell: "echo 000"
-- name: mask
-  shell: "ip addr"
